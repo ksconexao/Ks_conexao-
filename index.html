@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KS Conexão - Link na Bio</title>
+  <style>
+    body {
+      background: radial-gradient(circle, #000000, #1a1a1a);
+      font-family: Arial, sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: gold;
+      margin-top: 30px;
+      text-shadow: 0 0 10px gold;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .button {
+      display: block;
+      width: 80%;
+      max-width: 300px;
+      margin: 20px auto;
+      padding: 15px;
+      background: #222;
+      border: 2px solid gold;
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      font-size: 1.1rem;
+      position: relative;
+      transition: 0.3s ease;
+    }
+    .button:hover {
+      background-color: gold;
+      color: black;
+    }
+    .raio {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 1.5rem;
+      color: gold;
+      animation: queda 2s infinite alternate;
+    }
+    @keyframes queda {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(5px) rotate(10deg); }
+    }
+    .whatsapp-msg {
+      margin-top: 30px;
+    }
+    .whatsapp-msg input, .whatsapp-msg button {
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .whatsapp-msg input {
+      width: 80%;
+    }
+    .whatsapp-msg button {
+      background: gold;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">KS Conexão <span class="raio">⚡</span></div>
+
+  <a href="https://ksconexao.com.br" class="button">Site Oficial</a>
+  <a href="https://wa.me/5511978121070" class="button">WhatsApp</a>
+  <a href="https://www.instagram.com/ksconexao/" class="button">Instagram</a>
+  <a href="https://www.tiktok.com/@ksconexao" class="button">TikTok</a>
+
+  <div class="whatsapp-msg">
+    <input type="text" id="msg" placeholder="Escreva sua mensagem..." />
+    <button onclick="enviarMensagem()">Enviar para WhatsApp</button>
+  </div>
+
+  <script>
+    function enviarMensagem() {
+      const msg = document.getElementById("msg").value;
+      const link = `https://wa.me/5511978121070?text=${encodeURIComponent(msg || 'Vim pelas redes sociais e gostaria de um orçamento.')}`;
+      window.open(link, "_blank");
+    }
+  </script>
+</body>
+</html>
