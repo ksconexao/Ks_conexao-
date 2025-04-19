@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS Conexão - Serviços Elétricos</title>
+    <style>
+        /* Estilos Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        body {
+            background-color: #121212;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animações de fundo */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .gear {
+            position: absolute;
+            border-radius: 50%;
+            border: 4px dashed #d4af37;
+            animation: rotate 20s linear infinite;
+        }
+
+        .gear:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+        }
+
+        .gear:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 80%;
+            animation-direction: reverse;
+        }
+
+        .gear:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 20%;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .lightning {
+            position: absolute;
+            background: linear-gradient(to bottom, transparent, #d4af37, transparent);
+            width: 2px;
+            height: 50px;
+            opacity: 0;
+        }
+
+        .lightning:nth-child(4) {
+            top: 30%;
+            left: 30%;
+            animation: flash 7s infinite 1s;
+        }
+
+        .lightning:nth-child(5) {
+            top: 40%;
+            left: 70%;
+            animation: flash 7s infinite 3s;
+        }
+
+        .lightning:nth-child(6) {
+            top: 70%;
+            left: 50%;
+            animation: flash 7s infinite 5s;
+        }
+
+        @keyframes flash {
+            0%, 100% {
+                opacity: 0;
+                height: 50px;
+            }
+            1%, 5% {
+                opacity: 0.8;
+                height: 80px;
+            }
+        }
+
+        /* Logo e Cabeçalho */
+        .logo-container {
+            margin-bottom: 30px;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.7));
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.7));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.9));
+            }
+        }
+
+        .spark {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #fff, transparent);
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        .spark:nth-child(1) {
+            top: 40%;
+            right: 30%;
+            animation: sparkle 4s infinite 0.5s;
+        }
+
+        .spark:nth-child(2) {
+            top: 60%;
+            right: 40%;
+            animation: sparkle 4s infinite 1.5s;
+        }
+
+        .spark:nth-child(3) {
+            top: 50%;
+            right: 35%;
+            animation: sparkle 4s infinite 2.5s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Informações da Empresa */
+        .company-info {
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .company-info h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .company-info p {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #e0e0e0;
+        }
+
+        .cnpj {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-top: 5px;
+        }
+
+        /* Links e Botões */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 500px;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(145deg, #1a1a1a, #222);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(145deg, #222, #1a1a1a);
+        }
+
+        .link-btn:active {
+            transform: translateY(1px);
+        }
+
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .link-btn:hover::before {
+            left: 100%;
+        }
+
+        .link-icon {
+            margin-right: 15px;
+            font-size: 24px;
+            color: #d4af37;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(145deg, #075e54, #128c7e);
+            border-color: #128c7e;
+        }
+
+        .whatsapp-btn .link-icon {
+            color: #fff;
+        }
+
+        .whatsapp-btn:hover {
+            background: linear-gradient(145deg, #128c7e, #075e54);
+        }
+
+        .instagram-btn {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            border-color: #c13584;
+        }
+
+        .instagram-btn .link-icon {
+            color: #fff;
+        }
+
+        .tiktok-btn {
+            background: linear-gradient(90deg, #25F4EE, #000000, #FE2C55);
+            border-color: #FE2C55;
+        }
+
+        .tiktok-btn .link-icon {
+            color: #fff;
+        }
+
+        .quote-btn {
+            background: linear-gradient(145deg, #1a1a1a, #222);
+            border-color: #d4af37;
+        }
+
+        .quote-btn .link-icon {
+            color: #d4af37;
+        }
+
+        /* Formulário de Orçamento */
+        .quote-form-container {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+            background: rgba(30, 30, 30, 0.9);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .quote-form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #d4af37;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #d4af37;
+            outline: none;
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+
+        .service-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .service-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .service-option input[type="checkbox"] {
+            margin-right: 5px;
+            width: auto;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .form-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn {
+            background: #d4af37;
+            color: #000;
+        }
+
+        .submit-btn:hover {
+            background: #c4a030;
+        }
+
+        .cancel-btn {
+            background: #444;
+            color: #fff;
+        }
+
+        .cancel-btn:hover {
+            background: #555;
+        }
+
+        /* Depoimento */
+        .testimonial {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            border-left: 3px solid #d4af37;
+        }
+
+        .stars {
+            color: #d4af37;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #d4af37;
+        }
+
+        /* Galeria de Imagens */
+        .gallery-title {
+            text-align: center;
+            margin: 30px 0 20px;
+            color: #d4af37;
+            font-size: 22px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            height: 200px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Rodapé */
+        .footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 20px 0;
+            width: 100%;
+            color: #a0a0a0;
+            font-size: 14px;
+            border-top: 1px solid #333;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .logo-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .company-info h1 {
+                font-size: 20px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .service-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .logo-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .company-info h1 {
+                font-size: 18px;
+            }
+
+            .link-btn {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .gallery-item {
+                height: 150px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Animações de fundo -->
+        <div class="bg-animation">
+            <div class="gear"></div>
+            <div class="gear"></div>
+            <div class="gear"></div>
+            <div class="lightning"></div>
+            <div class="lightning"></div>
+            <div class="lightning"></div>
+        </div>
+
+        <!-- Logo -->
+        <div class="logo-container">
+            <img src="1000046215.webp" alt="KS Conexão Logo" class="logo">
+            <div class="spark"></div>
+            <div class="spark"></div>
+            <div class="spark"></div>
+        </div>
+
+        <!-- Informações da Empresa -->
+        <div class="company-info">
+            <h1>KS CONEXÃO</h1>
+            <p>Soluções elétricas profissionais para residências e empresas</p>
+            <p>Instalação, manutenção e projetos elétricos</p>
+            <p class="cnpj">CNPJ: 12.345.678/0001-90</p>
+        </div>
+
+        <!-- Links -->
+        <div class="links-container">
+            <a href="https://wa.me/5511978121070" class="link-btn whatsapp-btn">
+                <i class="fab fa-whatsapp link-icon"></i>
+                WhatsApp 24h
+            </a>
+            
+            <a href="#" class="link-btn quote-btn" id="quote-btn">
+                <i class="fas fa-bolt link-icon"></i>
+                Orçamento Rápido
+            </a>
+            
+            <a href="https://www.instagram.com/ks_conexao?igsh=a3lpNzJqd3U3NXE0" class="link-btn instagram-btn">
+                <i class="fab fa-instagram link-icon"></i>
+                Instagram
+            </a>
+            
+            <a href="https://www.tiktok.com/@ks.conexao?_t=ZM-8vf85tpu8s2&_r=1" class="link-btn tiktok-btn">
+                <i class="fab fa-tiktok link-icon"></i>
+                TikTok
+            </a>
+        </div>
+
+        <!-- Formulário de Orçamento -->
+        <div class="quote-form-container" id="quote-form">
+            <h2>Solicite seu Orçamento</h2>
+            <form id="orcamento-form">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="local">Local (endereço da obra):</label>
+                    <input type="text" id="local" name="local" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Tipo de serviço desejado:</label>
+                    <div class="service-options">
+                        <div class="service-option">
+                            <input type="checkbox" id="instalacao" name="servico" value="Instalação Elétrica">
+                            <label for="instalacao">Instalação Elétrica</label>
+                        </div>
+                        <div class="service-option">
+                            <input type="checkbox" id="reforma" name="servico" value="Reforma Elétrica">
+                            <label for="reforma">Reforma Elétrica</label>
+                        </div>
+                        <div class="service-option">
+                            <input type="checkbox" id="manutencao" name="servico" value="Manutenção Preventiva">
+                            <label for="manutencao">Manutenção Preventiva</label>
+                        </div>
+                        <div class="service-option">
+                            <input type="checkbox" id="laudo" name="servico" value="Laudo">
+                            <label for="laudo">Laudo</label>
+                        </div>
+                        <div class="service-option">
+                            <input type="checkbox" id="outro" name="servico" value="Outro">
+                            <label for="outro">Outro</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="outro-servico-container" style="display: none;">
+                    <label for="outro-servico">Especifique o serviço:</label>
+                    <input type="text" id="outro-servico" name="outro-servico">
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="button" class="form-btn cancel-btn" id="cancel-btn">Cancelar</button>
+                    <button type="submit" class="form-btn submit-btn">Enviar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Depoimento -->
+        <div class="testimonial">
+            <div class="stars">★★★★★</div>
+            <p class="testimonial-text">"Ótimo serviço, recomendo! Profissionais qualificados e atendimento de primeira."</p>
+            <p class="testimonial-author">– Carlos</p>
+        </div>
+
+        <!-- Galeria de Imagens -->
+        <h2 class="gallery-title">Nossos Trabalhos</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="1000075779.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="1000075780.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="1000075771.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="1000073543.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="1000070078.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="1000069971.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="1000069716.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="1000058916.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="1000050224.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="1000048346.jpg" alt="Instalação Elétrica" class="gallery-img">
+            </div>
+        </div>
+
+        <!-- Rodapé -->
+        <div class="footer">
+            <p>&copy; 2025 KS Conexão - Todos os direitos reservados</p>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar/ocultar formulário de orçamento
+        document.getElementById('quote-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('quote-form').style.display = 'block';
+        });
+
+        document.getElementById('cancel-btn').addEventListener('click', function() {
+            document.getElementById('quote-form').style.display = 'none';
+        });
+
+        // Mostrar/ocultar campo para especificar outro serviço
+        document.getElementById('outro').addEventListener('change', function() {
+            document.getElementById('outro-servico-container').style.display = 
+                this.checked ? 'block' : 'none';
+        });
+
+        // Enviar formulário para WhatsApp
+        document.getElementById('orcamento-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const local = document.getElementById('local').value;
+            
+            // Obter serviços selecionados
+            const servicosCheckboxes = document.querySelectorAll('input[name="servico"]:checked');
+            let servicos = [];
+            
+            servicosCheckboxes.forEach(function(checkbox) {
+                if (checkbox.value === 'Outro') {
+                    const outroServico = document.getElementById('outro-servico').value;
+                    if (outroServico) {
+                        servicos.push(outroServico);
+                    } else {
+                        servicos.push('Outro serviço');
+                    }
+                } else {
+                    servicos.push(checkbox.value);
+                }
+            });
+            
+            // Criar mensagem para WhatsApp
+            let mensagem = `*Solicitação de Orçamento - KS Conexão*%0A%0A`;
+            mensagem += `*Nome:* ${nome}%0A`;
+            mensagem += `*Local:* ${local}%0A`;
+            mensagem += `*Serviços:* ${servicos.join(', ')}%0A%0A`;
+            mensagem += `*Origem:* Site Link na Bio`;
+            
+            // Redirecionar para WhatsApp
+            window.location.href = `https://wa.me/5511978121070?text=${mensagem}`;
+        });
+
+        // Animação de entrada para os elementos
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = [
+                document.querySelector('.logo-container'),
+                document.querySelector('.company-info'),
+                ...document.querySelectorAll('.link-btn'),
+                document.querySelector('.testimonial'),
+                document.querySelector('.gallery-title'),
+                ...document.querySelectorAll('.gallery-item')
+            ];
+            
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
